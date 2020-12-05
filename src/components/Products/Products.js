@@ -3,7 +3,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 
 import { BiCartAlt } from "react-icons/bi";
 
-const Products = ({ products }) => {
+const Products = ({ products, handleAddToCart }) => {
   return (
     <Container fluid>
       <Row>
@@ -28,7 +28,9 @@ const Products = ({ products }) => {
                   </Row>
                   <Row>
                     <Col>
-                      <BiCartAlt />
+                      <BiCartAlt
+                        onClick={() => handleAddToCart(product.id, 1)}
+                      />
                     </Col>
                   </Row>
                 </Container>

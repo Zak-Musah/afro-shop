@@ -3,7 +3,7 @@ import React from "react";
 import { Navbar, Badge, Button } from "react-bootstrap";
 import { BiCartAlt } from "react-icons/bi";
 
-const NavBar = () => {
+const NavBar = ({ allItems }) => {
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -15,12 +15,12 @@ const NavBar = () => {
             height="30"
             className="d-inline-block align-top"
           />
-          Netina Corner
+          Latifa's Corner
         </Navbar.Brand>
         <Navbar.Brand style={{ float: "right" }}>
           <Button variant="primary">
             <BiCartAlt />
-            <Badge variant="secondary">9</Badge>
+            <Badge variant="secondary">{allItems}</Badge>
           </Button>
         </Navbar.Brand>
       </Navbar>

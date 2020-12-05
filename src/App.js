@@ -10,14 +10,24 @@ function App() {
     const { data } = await commerce.products.list();
     setProducts(data);
   };
+  const fetchCarts = async () => {
+    setCart(await commerce.cart.retrieve());
+  };
+
   useEffect(() => {
     fetchProducts();
+    fetchCarts();
   }, []);
+  const handleAddToCart = async (productId, quantity) => {
+    const item = await commerce.cart.add(productId, quantity);
+    setCart(item.cart);
+  };
+  console.log(cart);
 
   return (
     <div>
-      <NavBar />
-      <Products products={products} />
+      <NavBar allItems={cart.total_items} />
+      <Products products={products} handleAddToCart={handleAddToCart} />
     </div>
   );
 }
