@@ -1,9 +1,10 @@
 import React from "react";
-
+import { Link, useLocation } from "react-router-dom";
 import { Navbar, Badge, Button } from "react-bootstrap";
 import { BiCartAlt } from "react-icons/bi";
 
 const NavBar = ({ allItems }) => {
+  const location = useLocation();
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -15,14 +16,17 @@ const NavBar = ({ allItems }) => {
             height="30"
             className="d-inline-block align-top"
           />
-          Latifa's Corner
+          <Link to="/"> Latifa's Corner</Link>
         </Navbar.Brand>
-        <Navbar.Brand style={{ float: "right" }}>
-          <Button variant="primary">
-            <BiCartAlt />
-            <Badge variant="secondary">{allItems}</Badge>
-          </Button>
-        </Navbar.Brand>
+        {location.pathname === "/" && (
+          <Navbar.Brand style={{ float: "right" }}>
+            <Link to="/cart">Go to cart</Link>
+            <Button variant="link">
+              <BiCartAlt />
+              <Badge variant="secondary">{allItems}</Badge>
+            </Button>
+          </Navbar.Brand>
+        )}
       </Navbar>
     </>
   );

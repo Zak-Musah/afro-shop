@@ -8,8 +8,8 @@ const Products = ({ products, handleAddToCart }) => {
     <Container fluid>
       <Row>
         {products.map((product) => (
-          <Col style={{ height: "25rem", margin: "2rem" }}>
-            <Card key={product.id} style={{ width: "22rem", height: "25rem" }}>
+          <Col key={product.id} style={{ height: "25rem", margin: "2rem" }}>
+            <Card style={{ width: "22rem", height: "25rem" }}>
               <Card.Img
                 variant="top"
                 src={product.media.source}

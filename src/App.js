@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import { commerce } from "./Backend/Commerce";
-import { NavBar, Products } from "./components";
+import { NavBar, Products, Cart } from "./components";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -25,10 +27,20 @@ function App() {
   console.log(cart);
 
   return (
-    <div>
-      <NavBar allItems={cart.total_items} />
-      <Products products={products} handleAddToCart={handleAddToCart} />
-    </div>
+    <Router>
+      <div>
+        <NavBar allItems={cart.total_items} />
+
+        <Switch>
+          <Route exact path="/">
+            <Products products={products} handleAddToCart={handleAddToCart} />
+          </Route>
+          <Route exact path="/cart">
+            <Cart cart={cart} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
