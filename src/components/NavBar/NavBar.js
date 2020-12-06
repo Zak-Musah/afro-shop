@@ -20,7 +20,7 @@ const NavBar = ({ allItems }) => {
         </Navbar.Brand>
         {location.pathname === "/" && (
           <Navbar.Brand style={{ float: "right" }}>
-            <Link to="/cart">Go to cart</Link>
+            <Link to="/cart">Cart</Link>
             <Button variant="link">
               <BiCartAlt />
               <Badge variant="secondary">{allItems}</Badge>
