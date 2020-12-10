@@ -73,12 +73,14 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
           </Col>
           <Col>
             <Button variant="danger" onClick={onEmptyCart}>
-              Empty Cart
+              <h6 style={{ color: "white" }}> Empty Cart</h6>
             </Button>
           </Col>
           <Col>
             <Button variant="primary">
-              <Link to="/checkout">Checkout</Link>
+              <Link to="/checkout">
+                <h6 style={{ color: "white" }}>Checkout</h6>
+              </Link>
             </Button>
           </Col>
         </Row>
