@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   console.log(cart);
   const EmptyCart = () => (
     <h3>
@@ -31,16 +31,33 @@ const Cart = ({ cart }) => {
 
                     <Row>
                       <Col>
-                        <Button type="small" variant="secondary">
+                        <Button
+                          type="small"
+                          variant="secondary"
+                          onClik={() =>
+                            onUpdateCartQty(product.id, product.quantity - 1)
+                          }
+                        >
                           -
                         </Button>
                         {product.quantity}
-                        <Button type="small" variant="secondary">
+                        <Button
+                          type="small"
+                          variant="secondary"
+                          onClick={() =>
+                            onUpdateCartQty(product.id, product.quantity + 1)
+                          }
+                        >
                           +
                         </Button>
                       </Col>
                       <Col>
-                        <Button variant="danger">Remove</Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => onRemoveFromCart(product.id)}
+                        >
+                          Remove
+                        </Button>
                       </Col>
                     </Row>
                   </Container>
@@ -55,10 +72,14 @@ const Cart = ({ cart }) => {
             <h4>Subtotal: {cart.subtotal.formatted_with_symbol}</h4>
           </Col>
           <Col>
-            <Button variant="danger">Empty Cart</Button>
+            <Button variant="danger" onClick={onEmptyCart}>
+              Empty Cart
+            </Button>
           </Col>
           <Col>
-            <Button variant="primary">Checkout</Button>
+            <Button variant="primary">
+              <Link to="/checkout">Checkout</Link>
+            </Button>
           </Col>
         </Row>
       </Container>
