@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Navbar, Badge, Button } from "react-bootstrap";
 import { BiCartAlt } from "react-icons/bi";
-
+import afrofashion from "../images/afrofashion.png";
 const NavBar = ({ allItems }) => {
   const location = useLocation();
   return (
@@ -11,12 +11,12 @@ const NavBar = ({ allItems }) => {
         <Navbar.Brand href="#home">
           <img
             alt=""
-            src="/logo.svg"
+            src={afrofashion}
             width="30"
             height="30"
             className="d-inline-block align-top"
           />
-          <Link to="/"> Latifa's Corner</Link>
+          <Link to="/"> Netina Corner</Link>
         </Navbar.Brand>
         {location.pathname === "/" && (
           <Navbar.Brand style={{ float: "right" }}>

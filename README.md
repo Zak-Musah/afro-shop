@@ -32,10 +32,6 @@ Get up and running with the following.
 git clone https://github.com/Zak-Musah/afro-shop.git
 
 cd afro-shop
-
-```
-
-cd frontend
 npm install
 npm start [Automatically launches app in your default browser on http://localhost:3000]
 
@@ -46,7 +42,6 @@ npm start [Automatically launches app in your default browser on http://localhos
 ## Backend
 
 - CommerceJS
-
 
 ## Frontend
 
@@ -70,5 +65,7 @@ npm start [Automatically launches app in your default browser on http://localhos
 - stripe/stripe-js v1.11.0 /stripe/react-stripe-js v1.1.2 for payment functionality
 
 # Comment --> project on-going
+
+```
 
 ```
