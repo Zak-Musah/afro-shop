@@ -1,45 +1,61 @@
 import React from "react";
-import { Card, Container, Row, Col } from "react-bootstrap";
-
-import { BiCartAlt } from "react-icons/bi";
+import {
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
+import { AddShoppingCart } from "@material-ui/icons";
+import useStyles from "./styles";
 
 const Products = ({ products, handleAddToCart }) => {
+  const classes = useStyles();
+
+  if (!products.length) return <p>Loading...</p>;
   return (
-    <Container fluid>
-      <Row>
+    <main className={classes.content}>
+      <div className={classes.toolbar} />
+      <Grid container justify="center" spacing={4}>
         {products.map((product) => (
-          <Col key={product.id} style={{ height: "25rem", margin: "2rem" }}>
-            <Card style={{ width: "22rem", height: "25rem" }}>
-              <Card.Img
-                variant="top"
-                src={product.media.source}
-                style={{ width: "22rem", height: "18rem" }}
+          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
+            <Card className={classes.root}>
+              <CardMedia
+                className={classes.media}
+                image={product.media.source}
+                title={product.name}
               />
-              <Card.Body>
-                <Container>
-                  <Row>
-                    <Col>{product.name}</Col>
-                    <Col>{product.price.formatted_with_symbol}</Col>
-                  </Row>
-                  <Row>
-                    <Col
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
-                  </Row>
-                  <Row>
-                    <Col>
-                      <BiCartAlt
-                        onClick={() => handleAddToCart(product.id, 1)}
-                      />
-                    </Col>
-                  </Row>
-                </Container>
-              </Card.Body>
+              <CardContent>
+                <div className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {product.name}
+                  </Typography>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    ${product.price.formatted}
+                  </Typography>
+                </div>
+                <Typography
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                />
+              </CardContent>
+              <CardActions disableSpacing className={classes.cardActions}>
+                <IconButton
+                  aria-label="Add to Cart"
+                  onClick={() => handleAddToCart(product.id, 1)}
+                >
+                  <AddShoppingCart />
+                </IconButton>
+              </CardActions>
             </Card>
-          </Col>
+          </Grid>
         ))}
-      </Row>
-    </Container>
+      </Grid>
+    </main>
   );
 };
 

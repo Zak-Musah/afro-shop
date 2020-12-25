@@ -1,99 +1,77 @@
 import React from "react";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Container, Typography, Button, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+import useStyles from "./styles";
+import CartItem from "./CartItem/CartItem";
+
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
-  console.log(cart);
-  const EmptyCart = () => (
-    <h3>
-      You have no items in your shopping cart
-      <Link to="/">Start adding some products</Link>
-    </h3>
+  const classes = useStyles();
+
+  const handleEmptyCart = () => onEmptyCart();
+
+  const renderEmptyCart = () => (
+    <Typography variant="subtitle1">
+      You have no items in your shopping cart,
+      <Link className={classes.link} to="/">
+        start adding some
+      </Link>
+      !
+    </Typography>
   );
-  const FilledCart = () => (
+
+  if (!cart.line_items) return "Loading";
+
+  const renderCart = () => (
     <>
-      <Container fluid>
-        <Row>
-          {cart.line_items.map((product) => (
-            <Col key={product.id} style={{ height: "25rem", margin: "2rem" }}>
-              <Card style={{ width: "22rem", height: "25rem" }}>
-                <Card.Img
-                  variant="top"
-                  src={product.media.source}
-                  style={{ width: "22rem", height: "18rem" }}
-                />
-                <Card.Body>
-                  <Container>
-                    <Row>
-                      <Col>{product.name}</Col>
-                      <Col>{product.price.formatted_with_symbol}</Col>
-                    </Row>
-
-                    <Row>
-                      <Col>
-                        <Button
-                          type="small"
-                          variant="secondary"
-                          onClik={() =>
-                            onUpdateCartQty(product.id, product.quantity - 1)
-                          }
-                        >
-                          -
-                        </Button>
-                        {product.quantity}
-                        <Button
-                          type="small"
-                          variant="secondary"
-                          onClick={() =>
-                            onUpdateCartQty(product.id, product.quantity + 1)
-                          }
-                        >
-                          +
-                        </Button>
-                      </Col>
-                      <Col>
-                        <Button
-                          variant="danger"
-                          onClick={() => onRemoveFromCart(product.id)}
-                        >
-                          Remove
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-
-        <Row>
-          <Col>
-            <h4>Subtotal: {cart.subtotal.formatted_with_symbol}</h4>
-          </Col>
-          <Col>
-            <Button variant="danger" onClick={onEmptyCart}>
-              <h6 style={{ color: "white" }}> Empty Cart</h6>
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="primary">
-              <Link to="/checkout">
-                <h6 style={{ color: "white" }}>Checkout</h6>
-              </Link>
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+      <Grid container spacing={3}>
+        {cart.line_items.map((lineItem) => (
+          <Grid item xs={12} sm={4} key={lineItem.id}>
+            <CartItem
+              item={lineItem}
+              onUpdateCartQty={onUpdateCartQty}
+              onRemoveFromCart={onRemoveFromCart}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <div className={classes.cardDetails}>
+        <Typography variant="h4">
+          Subtotal: {cart.subtotal.formatted_with_symbol}
+        </Typography>
+        <div>
+          <Button
+            className={classes.emptyButton}
+            size="large"
+            type="button"
+            variant="contained"
+            color="secondary"
+            onClick={handleEmptyCart}
+          >
+            Empty cart
+          </Button>
+          <Button
+            className={classes.checkoutButton}
+            component={Link}
+            to="/checkout"
+            size="large"
+            type="button"
+            variant="contained"
+            color="primary"
+          >
+            Checkout
+          </Button>
+        </div>
+      </div>
     </>
   );
-  if (!cart.line_items) return "Loading...";
   return (
-    <Container fluid>
-      <div>
-        <h3>Your Shopping Cart</h3>
-      </div>
-      {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+    <Container>
+      <div className={classes.toolbar} />
+      <Typography className={classes.title} variant="h3" gutterBottom>
+        Your Shopping Cart
+      </Typography>
+      {!cart.line_items.length ? renderEmptyCart() : renderCart()}
     </Container>
   );
 };
