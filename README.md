@@ -1,5 +1,5 @@
 <p align="center" style="color: #343a40">
-  <h1 align="center">Afro Shop - ReactJS CommerceJS and AWS Codepipeline for continuous delivery</h1>
+  <h1 align="center">Afro Shop - ReactJS and CommerceJS </h1>
 </p>
 <p align="center" style="font-size: 1.2rem;">A full-stack African fashion online shop built with ReactJS and CommerceJS</p>
 
@@ -8,7 +8,7 @@
 ## Demo
 
 Check out the live app, running on AWS S3:
-[Demo](https://aws-codepipeline-afro-shop.s3.eu-central-1.amazonaws.com/index.html)
+[Demo](https://afroshop.netlify.app/)
 
 # [📖 Docs]
 
