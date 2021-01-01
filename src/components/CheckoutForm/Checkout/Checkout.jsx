@@ -39,13 +39,13 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
           setCheckoutToken(token);
         } catch {
-          if (activeStep !== steps.length) history.push("/");
+          history.push("/");
         }
       };
 
       generateToken();
     }
-  }, [cart]);
+  }, [cart, history]);
 
   const test = (data) => {
     setShippingData(data);

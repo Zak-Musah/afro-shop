@@ -8,7 +8,6 @@ import { NavBar, Products, Cart } from "./components";
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
-  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -48,9 +47,7 @@ function App() {
         checkoutTokenId,
         newOrder,
       );
-
       setOrder(incomingOrder);
-
       refreshCart();
     } catch (error) {
       setErrorMessage(error.data.error.message);
@@ -58,14 +55,12 @@ function App() {
   };
   const refreshCart = async () => {
     const newCart = await commerce.cart.refresh();
-
     setCart(newCart);
   };
   return (
     <Router>
       <div>
         <NavBar allItems={cart.total_items} />
-
         <Switch>
           <Route exact path="/">
             <Products products={products} handleAddToCart={handleAddToCart} />
